@@ -2,43 +2,23 @@ import {Component} from 'react'
 import './index.css'
 
 class Welcome extends Component {
-  state = {isLoggedIn: true}
+  state = {isSubscribe: true}
 
-  onSubscribe = () => (
-    <button type="button" onClick={this.onSubscribed}>
-      Subscribed
-    </button>
-  )
-
-  onSubscribed = () => (
-    <button type="button" onClick={this.onSubscribe}>
-      Subscribe
-    </button>
-  )
-
-  renderAuthButton = () => {
-    const {isLoggedIn} = this.state
-
-    if (isLoggedIn === true) {
-      return (
-        <button type="button" onClick={this.onSubscribe}>
-          Subscribe
-        </button>
-      )
-    }
-    return (
-      <button type="button" onClick={this.onSubscribed}>
-        Subscribed
-      </button>
-    )
+  onClickButton = () => {
+    this.setState(prevState => ({isSubscribe: !prevState.isSubscribe}))
   }
 
   render() {
+    const {isSubscribe} = this.state
+    const buttonText = isSubscribe ? 'Subscribe' : 'Subscribed'
+
     return (
       <div className="container">
         <h1 className="heading">Welcome</h1>
         <p className="description">Thank you!Happy Learning</p>
-        {this.renderAuthButton()}
+        <button type="button" onClick={this.onClickButton}>
+          {buttonText}
+        </button>
       </div>
     )
   }
